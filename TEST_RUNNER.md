@@ -1,6 +1,6 @@
 # 测试运行指南
 
-本指南提供了 `demo` 目录下所有测试类的运行命令。
+本指南提供了 `demo`目录下所有测试类的运行命令。
 
 ## 编译项目
 
@@ -16,7 +16,7 @@ mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
 
 ## 测试类运行命令
 
-### 1. 手动测试类（不依赖 JMH）
+### 手动测试类
 
 | 测试类 | 运行命令 | 说明 |
 |--------|---------|------|
@@ -36,13 +36,71 @@ mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
 | `ValidationBenchmark` | `java -cp "target\classes;target\dependency\*" demo.ValidationBenchmark` | 核心验证性能测试 |
 | `ValidationChecksBenchmark` | `java -cp "target\classes;target\dependency\*" demo.ValidationChecksBenchmark` | 验证检查性能测试 |
 | `ValidationRulesCombinationBenchmark` | `java -cp "target\classes;target\dependency\*" demo.ValidationRulesCombinationBenchmark` | 验证规则组合性能测试 |
-
-### 2. JMH 测试类（依赖 JMH 框架）
-
-| 测试类 | 运行命令 | 说明 |
-|--------|---------|------|
 | `TypedValidatorBenchmark` | `java -cp "target\classes;target\dependency\*" org.openjdk.jmh.Main demo.TypedValidatorBenchmark` | TypedValidator 性能测试（使用 JMH） |
 | `HibernateValidatorComparisonBenchmark` | `java -cp "target\classes;target\dependency\*" org.openjdk.jmh.Main demo.HibernateValidatorComparisonBenchmark` | Hibernate Validator 对比测试（使用 JMH） |
+
+
+或者<br/>
+### 使用 [run_benchmarks](./run_benchmarks.py) 脚本运行
+![img.png](images/img.png)
+![img.png](images/img2.png)
+### 脚本分析[analyze](./analyze.py) 
+![img.png](images/img3.png)
+![img.png](images/img4.png)
+
+**run_benchmarks.py 参数**
+
+| 参数             | 简写   | 说明           | 默认值  |
+| -------------- | ---- | ------------ | ---- |
+| `--output-dir` | `-o` | 指定测试结果文件保存目录 | 当前目录 |
+
+**示例：**
+
+```bash
+# 默认输出到当前目录
+python run_benchmarks.py
+
+# 指定输出目录（自动创建）
+python run_benchmarks.py -o ./benchmark-results
+python run_benchmarks.py --output-dir D:/Work/failure-benchmark/results
+```
+
+**analyze.py 参数**
+
+| 参数             | 简写   | 说明                         | 默认值        |
+| -------------- | ---- | -------------------------- | ---------- |
+| `input_dir`    | 位置参数 | 包含 `benchmark-*.txt` 文件的目录 | `.` (当前目录) |
+| `--output-dir` | `-o` | 分析报告保存目录                   | 当前目录       |
+
+**示例：**
+```bash
+# 分析当前目录的测试文件，报告输出到当前目录
+python analyze.py
+
+# 分析指定目录，报告输出到当前目录
+python analyze.py ./benchmark-results
+
+# 指定输入和输出目录（完全分离）
+python analyze.py ./benchmark-results -o ./analysis-reports
+python analyze.py D:/Work/failure-benchmark/results --output-dir D:/Work/failure-benchmark/analysis
+
+# 使用绝对路径
+python analyze.py "D:\Work\failure-benchmark\results" -o "D:\Work\failure-benchmark\analysis"
+```
+
+
+### 组合使用流程（推荐）
+```bash
+# 1. 先创建专门的目录
+mkdir benchmark-results
+mkdir analysis-reports
+
+# 2. 运行测试，结果存到 benchmark-results
+python run_benchmarks.py -o benchmark-results
+
+# 3. 分析结果，报告存到 analysis-reports  
+python analyze.py benchmark-results -o analysis-reports
+```
 
 ## 运行注意事项
 
@@ -94,47 +152,6 @@ TypedValidator 数值验证（有效数据）: 38.8777 ns/op
 无 Spring 依赖的 TypedValidator 性能测试完成！
 ```
 
-### JMH 测试类输出示例：
-
-```
-# JMH version: 1.37
-# VM version: JDK 17.0.10, Java HotSpot(TM) 64-Bit Server VM, 17.0.10+11-LTS-240
-# VM invoker: C:\Program Files\Java\jdk-17.0.10\bin\java.exe
-# VM options: <none>
-# Warmup: 5 iterations, 1 s each
-# Measurement: 10 iterations, 1 s each
-# Timeout: 10 min per iteration
-# Threads: 1 thread, will synchronize iterations
-# Benchmark mode: Average time, time/op
-# Benchmark: demo.TypedValidatorBenchmark.testTypedValidatorStringValid
-
-# Run progress: 0.00% complete, ETA 00:05:00
-# Fork: 1 of 3
-# Warmup Iteration   1: 53.370 ns/op
-# Warmup Iteration   2: 52.145 ns/op
-# Warmup Iteration   3: 51.982 ns/op
-# Warmup Iteration   4: 52.018 ns/op
-# Warmup Iteration   5: 51.991 ns/op
-Iteration   1: 52.003 ns/op
-Iteration   2: 51.987 ns/op
-Iteration   3: 51.994 ns/op
-Iteration   4: 52.001 ns/op
-Iteration   5: 51.996 ns/op
-Iteration   6: 51.998 ns/op
-Iteration   7: 52.000 ns/op
-Iteration   8: 51.995 ns/op
-Iteration   9: 51.999 ns/op
-Iteration  10: 52.002 ns/op
-
-# Run progress: 33.33% complete, ETA 00:03:20
-# Fork: 2 of 3
-...
-
-Result "demo.TypedValidatorBenchmark.testTypedValidatorStringValid":
-  52.000 ±(99.9%) 0.005 ns/op [Average]
-  (min, avg, max) = (51.987, 52.000, 52.003), stdev = 0.005
-  CI (99.9%): [51.995, 52.005] (assumes normal distribution)
-```
 
 ## 总结
 
