@@ -1,5 +1,9 @@
 # 测试运行指南
 
+## 🌐 语言 / Language
+- [English](./TEST_RUNNER_EN)
+- [中文](./TEST_RUNNER)
+
 本指南提供了 `demo`目录下所有测试类的运行命令。
 
 ## 编译项目
