@@ -1,0 +1,286 @@
+测试环境信息
+Python: 3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]
+Classpath: target\classes;target\dependency\*
+JDK版本:
+java version "17.0.16" 2025-07-15 LTS
+Java(TM) SE Runtime Environment (build 17.0.16+12-LTS-247)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.16+12-LTS-247, mixed mode, sharing)
+
+
+测试次数(多数 case 内置): 1,000,000
+
+============================================================
+手动测试（main 入口）
+============================================================
+
+------------------------------------------------------------
+[NoSpringChainBenchmark] 开始: 18:05:46
+开始无 Spring 依赖的验证链性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 212.7794 ns/op, sink=1000000
+Fail-Fast 简单验证（无效数据）: 161.602 ns/op, sink=0
+Fail-Strict 简单验证（有效数据）: 115.2894 ns/op, sink=1000000
+Fail-Strict 简单验证（无效数据）: 262.5509 ns/op, sink=0
+传统 if-throw 简单验证（有效数据）: 213.2299 ns/op, sink=1000000
+传统 if-throw 简单验证（无效数据）: 556.6902 ns/op, sink=-1000000
+========================================
+无 Spring 依赖的验证链性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] NoSpringChainBenchmark 完成
+[NoSpringChainBenchmark] 结束: 18:05:47
+
+------------------------------------------------------------
+[NoSpringTypedValidatorBenchmark] 开始: 18:05:47
+开始无 Spring 依赖的 TypedValidator 性能测试...
+测试次数: 1000000
+=======================================
+TypedValidator 字符串验证（有效数据）: 46.3889 ns/op, sink=1000000
+TypedValidator 字符串验证（无效数据）: 170.3371 ns/op, sink=0
+TypedValidator 数值验证（有效数据）: 25.7652 ns/op, sink=1000000
+TypedValidator 数值验证（无效数据）: 90.2941 ns/op, sink=0
+传统 if-throw 字符串验证（有效数据）: 9.6704 ns/op
+传统 if-throw 字符串验证（无效数据）: 407.1293 ns/op
+传统 if-throw 数值验证（有效数据）: 1.733 ns/op
+传统 if-throw 数值验证（无效数据）: 383.1381 ns/op
+=======================================
+无 Spring 依赖的 TypedValidator 性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] NoSpringTypedValidatorBenchmark 完成
+[NoSpringTypedValidatorBenchmark] 结束: 18:05:49
+
+------------------------------------------------------------
+[ManualTypedValidatorBenchmark] 开始: 18:05:49
+开始手动测试 TypedValidator 性能...
+测试次数: 1000000
+=======================================
+TypedValidator 字符串验证（有效数据）: 43.7382 ns/op
+TypedValidator 字符串验证（无效数据）: 172.2054 ns/op
+TypedValidator 数值验证（有效数据）: 27.8041 ns/op
+TypedValidator 数值验证（无效数据）: 88.9256 ns/op
+=======================================
+手动测试 TypedValidator 性能完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ManualTypedValidatorBenchmark 完成
+[ManualTypedValidatorBenchmark] 结束: 18:05:49
+
+------------------------------------------------------------
+[AopValidationBenchmark] 开始: 18:05:49
+开始 AOP 验证性能测试...
+测试次数: 1000000
+=======================================
+无验证方法: 3.3259 ns/op, sink=1000000
+有验证方法（有效数据）: 151.5904 ns/op, sink=1000000
+有验证方法（无效数据）: 257.0968 ns/op, sink=1000000
+=======================================
+AOP 验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] AopValidationBenchmark 完成
+[AopValidationBenchmark] 结束: 18:05:50
+
+------------------------------------------------------------
+[BatchValidationBenchmark] 开始: 18:05:50
+开始批量验证性能测试...
+测试次数: 1000000
+批量大小: 100
+=======================================
+单个验证（有效数据）: 43.6424 ns/op
+单个验证（无效数据）: 152.2536 ns/op
+批量验证（有效数据）: 17.6904 ns/op
+批量验证（无效数据）: 120.854 ns/op
+并行批量验证（有效数据）: 124.6849 ns/op
+并行批量验证（无效数据）: 2.2134 ns/op
+=======================================
+批量验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] BatchValidationBenchmark 完成
+[BatchValidationBenchmark] 结束: 18:05:50
+
+------------------------------------------------------------
+[ChainValidationBenchmark] 开始: 18:05:50
+开始验证链性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 213.3622 ns/op, sink=1000000
+Fail-Fast 简单验证（无效数据）: 155.6512 ns/op, sink=0
+Fail-Strict 简单验证（有效数据）: 117.9361 ns/op, sink=1000000
+Fail-Strict 简单验证（无效数据）: 262.6361 ns/op, sink=0
+传统 if-throw 简单验证（有效数据）: 210.8296 ns/op, sink=1000000
+传统 if-throw 简单验证（无效数据）: 382.141 ns/op, sink=-1000000
+========================================
+验证链性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ChainValidationBenchmark 完成
+[ChainValidationBenchmark] 结束: 18:05:52
+
+------------------------------------------------------------
+[ComplexObjectValidationBenchmark] 开始: 18:05:52
+开始复杂对象验证性能测试...
+测试次数: 1000000
+=======================================
+嵌套对象验证（有效数据）: 41.2509 ns/op
+嵌套对象验证（无效数据）: 171.6917 ns/op
+集合类型验证（有效数据）: 25.3668 ns/op
+集合类型验证（无效数据）: 102.5398 ns/op
+=======================================
+复杂对象验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ComplexObjectValidationBenchmark 完成
+[ComplexObjectValidationBenchmark] 结束: 18:05:52
+
+------------------------------------------------------------
+[ConcurrentValidationBenchmark] 开始: 18:05:52
+开始并发验证性能测试...
+测试次数: 1000000
+=======================================
+测试线程数: 1
+  有效数据: 245.8852 ns/op
+  无效数据: 383.2755 ns/op
+
+测试线程数: 2
+  有效数据: 61.1815 ns/op
+  无效数据: 134.2643 ns/op
+
+测试线程数: 4
+  有效数据: 39.2869 ns/op
+  无效数据: 79.3298 ns/op
+
+测试线程数: 8
+  有效数据: 27.6665 ns/op
+  无效数据: 55.7401 ns/op
+
+测试线程数: 16
+  有效数据: 32.0734 ns/op
+  无效数据: 52.154 ns/op
+
+=======================================
+并发验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ConcurrentValidationBenchmark 完成
+[ConcurrentValidationBenchmark] 结束: 18:05:54
+
+------------------------------------------------------------
+[CoreValidationBenchmark] 开始: 18:05:54
+开始核心性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 203.879 ns/op, sink=1000000
+Fail-Fast 简单验证（无效数据）: 147.5227 ns/op, sink=0
+Fail-Strict 简单验证（有效数据）: 117.9368 ns/op, sink=1000000
+Fail-Strict 简单验证（无效数据）: 251.7176 ns/op, sink=0
+传统 if-throw 简单验证（有效数据）: 261.51 ns/op, sink=1000000
+传统 if-throw 简单验证（无效数据）: 384.6648 ns/op, sink=-1000000
+Fail-Fast 复杂验证（有效数据）: 112.4279 ns/op, sink=1000000
+Fail-Fast 复杂验证（无效数据）: 182.7479 ns/op, sink=0
+========================================
+核心性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] CoreValidationBenchmark 完成
+[CoreValidationBenchmark] 结束: 18:05:55
+
+------------------------------------------------------------
+[I18nValidationBenchmark] 开始: 18:05:55
+开始国际化验证性能测试...
+测试次数: 1000000
+=======================================
+普通消息验证（有效数据）: 196.3842 ns/op
+普通消息验证（无效数据）: 278.8061 ns/op
+国际化消息验证（有效数据）: 94.9109 ns/op
+国际化消息验证（无效数据）: 200.9101 ns/op
+=======================================
+国际化验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] I18nValidationBenchmark 完成
+[I18nValidationBenchmark] 结束: 18:05:56
+
+------------------------------------------------------------
+[ReflectionCacheBenchmark] 开始: 18:05:56
+开始反射缓存性能测试...
+测试次数: 1000000
+=======================================
+首次验证（有效数据）: 1.01491E7 ns/op
+后续验证（有效数据）: 31.2352 ns/op
+首次验证（无效数据）: 2.7325E7 ns/op
+后续验证（无效数据）: 131.7911 ns/op
+=======================================
+反射缓存性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ReflectionCacheBenchmark 完成
+[ReflectionCacheBenchmark] 结束: 18:05:57
+
+------------------------------------------------------------
+[SimpleValidationBenchmark] 开始: 18:05:57
+开始性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 211.6026 ns/op, sink=1000000
+Fail-Fast 简单验证（无效数据）: 195.6153 ns/op, sink=-1000000
+Fail-Strict 简单验证（有效数据）: 103.8188 ns/op, sink=1000000
+Fail-Strict 简单验证（无效数据）: 487.593 ns/op, sink=-1000000
+传统 if-throw 简单验证（有效数据）: 202.2943 ns/op, sink=1000000
+传统 if-throw 简单验证（无效数据）: 389.3235 ns/op, sink=-1000000
+Fail-Fast 复杂验证（有效数据）: 105.742 ns/op, sink=1000000
+Fail-Fast 复杂验证（无效数据）: 236.3315 ns/op, sink=-1000000
+========================================
+性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] SimpleValidationBenchmark 完成
+[SimpleValidationBenchmark] 结束: 18:05:59
+
+------------------------------------------------------------
+[SpringIntegrationBenchmark] 开始: 18:05:59
+开始 Spring 集成性能测试...
+测试次数: 1000000
+=======================================
+原生验证（有效数据）: 167.4736 ns/op, sink=1000000
+原生验证（无效数据）: 315.5363 ns/op, sink=1000000
+Spring AOP 验证（有效数据）: 112.8593 ns/op, sink=1000000
+Spring AOP 验证（无效数据）: 215.154 ns/op, sink=1000000
+=======================================
+Spring 集成性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] SpringIntegrationBenchmark 完成
+[SpringIntegrationBenchmark] 结束: 18:06:00
+
+------------------------------------------------------------
+[ValidationChecksBenchmark] 开始: 18:06:00
+开始验证检查性能测试...
+测试次数: 1000000
+========================================
+字符串非空检查（有效数据）: 18.288 ns/op
+字符串非空检查（无效数据）: 5.1359 ns/op
+邮箱格式检查（有效数据）: 194.0199 ns/op
+邮箱格式检查（无效数据）: 181.4737 ns/op
+数值大于等于检查（有效数据）: 5.6073 ns/op
+数值大于等于检查（无效数据）: 3.8193 ns/op
+字符串长度最小检查（有效数据）: 2.8144 ns/op
+字符串长度最小检查（无效数据）: 2.6604 ns/op
+========================================
+验证检查性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ValidationChecksBenchmark 完成
+[ValidationChecksBenchmark] 结束: 18:06:00
+
+------------------------------------------------------------
+[ValidationRulesCombinationBenchmark] 开始: 18:06:00
+开始验证规则组合性能测试...
+测试次数: 1000000
+=======================================
+少量验证规则（有效数据）: 242.9044 ns/op
+少量验证规则（无效数据）: 324.3155 ns/op
+中量验证规则（有效数据）: 135.4436 ns/op
+中量验证规则（无效数据）: 243.9836 ns/op
+大量验证规则（有效数据）: 133.9093 ns/op
+大量验证规则（无效数据）: 226.0263 ns/op
+=======================================
+验证规则组合性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ValidationRulesCombinationBenchmark 完成
+[ValidationRulesCombinationBenchmark] 结束: 18:06:02
+
+============================================================
+JMH 测试
+============================================================
+- 未配置 JMH 基准（可用 --jmh-includes 传入 include 模式）
+
+测试完成: 2026-03-16 18:06:02.285744

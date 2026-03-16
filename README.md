@@ -11,8 +11,8 @@
 ---
 
 ## 🌐 语言 / Language
-- [English](./README_EN)
-- [中文](./README)
+- [English](./README_EN.md)
+- [中文](./README.md)
 
 ---
 
@@ -26,7 +26,7 @@
 - 使用 `@Validate` 注解（基于 AOP）的运行时开销
 - 高并发下的内存分配和 GC 压力
 
-所有基准测试均使用 **[JMH (Java Microbenchmark Harness)](https://openjdk.org/projects/code-tools/jmh/)** 构建，并在典型的 Spring Boot 应用上下文中运行。
+本仓库提供可直接运行的基准用例（`main` 入口，便于快速复现/对齐语义），并保留 **[JMH (Java Microbenchmark Harness)](https://openjdk.org/projects/code-tools/jmh/)** 依赖用于后续补齐严格 micro-benchmark 口径。
 
 ---
 
@@ -80,7 +80,16 @@
 
 ## ▶️ 如何运行基准测试？
 
-完整的测试运行命令、脚本使用方法和故障排除指南，请参考：[TEST_RUNNER_zh.md](./TEST_RUNNER)
+完整的测试运行命令、脚本使用方法和故障排除指南，请参考：[TEST_RUNNER.md](docs/TEST_RUNNER.md)
+
+常用命令（推荐）：
+```
+# 运行黄金基准集（JMH），输出包含 jmh-*.json（可对外引用）
+python run_benchmarks.py -o ./benchmark-results --jmh-only --jmh-golden
+
+# 汇总生成 Markdown 报告（会同时读取 benchmark-*.txt 与 jmh-*.json）
+python analyze.py ./benchmark-results -o ./analysis-reports
+```
 ```
 示例输出（片段）：
 TypedValidator 字符串验证（有效数据）: 61.7228 ns/op

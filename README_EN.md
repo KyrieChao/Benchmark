@@ -11,8 +11,8 @@
 ---
 
 ## 🌐 Language / 语言
-- [English](./README_EN)
-- [中文](./README)
+- [English](./README_EN.md)
+- [中文](./README.md)
 
 ---
 
@@ -26,7 +26,7 @@ Key comparisons include:
 - Runtime overhead of using `@Validate` annotation (AOP-based)
 - Memory allocation and GC pressure under high concurrency
 
-All benchmarks are built using **[JMH (Java Microbenchmark Harness)](https://openjdk.org/projects/code-tools/jmh/)** and run in a typical Spring Boot application context.
+This repo provides runnable benchmark cases (via `main`, for fast reproduction and semantic alignment), and keeps **[JMH (Java Microbenchmark Harness)](https://openjdk.org/projects/code-tools/jmh/)** dependencies for adding strict micro-benchmark baselines.
 
 ---
 
@@ -80,7 +80,16 @@ Below are the performance comparison results using JMH with JDK 17.0.16, 3 Forks
 
 ## ▶️ How to Run Benchmarks?
 
-For complete test running commands, script usage, and troubleshooting guides, please refer to: [TEST_RUNNER.md](./TEST_RUNNER_EN)
+For complete test running commands, script usage, and troubleshooting guides, please refer to: [TEST_RUNNER_EN.md](docs/TEST_RUNNER_EN.md)
+
+Common commands (recommended):
+```
+# Run golden suite (JMH), outputs jmh-*.json (referenceable raw data)
+python run_benchmarks.py -o ./benchmark-results --jmh-only --jmh-golden
+
+# Generate Markdown report (reads both benchmark-*.txt and jmh-*.json)
+python analyze.py ./benchmark-results -o ./analysis-reports
+```
 ```
 Sample output (snippet):
 TypedValidator string validation (valid data): 61.7228 ns/op

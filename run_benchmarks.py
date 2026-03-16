@@ -17,6 +17,8 @@ def get_classpath():
 # 配置
 TEST_COUNT = 1_000_000
 CLASSPATH = get_classpath()
+BASE_PACKAGE = "com.chao.benchmark"
+GOLDEN_JMH_INCLUDES = [f"{BASE_PACKAGE}.jmh.*"]
 
 # 手动测试类列表
 MANUAL_TESTS = [
@@ -38,12 +40,9 @@ MANUAL_TESTS = [
 ]
 
 # JMH 测试类列表
-JMH_TESTS = [
-    "TypedValidatorBenchmark",
-    "HibernateValidatorComparisonBenchmark",
-]
+JMH_TESTS = []
 
-def get_java_cmd(class_name, is_jmh=False):
+def get_java_cmd(class_name, is_jmh=False, jmh_includes=None, jmh_args=None):
     """构建 Java 命令，强制 UTF-8 编码"""
     base_cmd = [
         "java",
@@ -54,15 +53,19 @@ def get_java_cmd(class_name, is_jmh=False):
     ]
 
     if is_jmh:
-        base_cmd.extend(["org.openjdk.jmh.Main", f"demo.{class_name}"])
+        base_cmd.extend(["org.openjdk.jmh.Main"])
+        if jmh_args:
+            base_cmd.extend(jmh_args)
+        includes = jmh_includes or [f"{BASE_PACKAGE}.{class_name}"]
+        base_cmd.extend(includes)
     else:
-        base_cmd.append(f"demo.{class_name}")
+        base_cmd.append(f"{BASE_PACKAGE}.{class_name}")
 
     return base_cmd
 
-def run_java(class_name, is_jmh=False):
+def run_java(class_name, is_jmh=False, jmh_includes=None, jmh_args=None):
     """运行 Java 测试类"""
-    cmd = get_java_cmd(class_name, is_jmh)
+    cmd = get_java_cmd(class_name, is_jmh, jmh_includes=jmh_includes, jmh_args=jmh_args)
 
     print(f"运行: {class_name}{' (JMH)' if is_jmh else ''}")
     print(f"  命令: java -cp {CLASSPATH} ...")
@@ -80,7 +83,7 @@ def run_java(class_name, is_jmh=False):
     )
 
     output = (result.stdout or "") + (result.stderr or "")
-    return output
+    return output, result.returncode
 
 def check_environment():
     """检查环境"""
@@ -110,6 +113,27 @@ def check_windows_encoding():
 def main():
     parser = argparse.ArgumentParser(description='Failure Framework 性能测试')
     parser.add_argument('-o', '--output-dir', type=str, default=None, help='指定输出目录')
+    parser.add_argument('--manual-only', action='store_true', help='仅运行手动测试（main 入口）')
+    parser.add_argument('--jmh-only', action='store_true', help='仅运行 JMH（需要存在 JMH 基准）')
+    parser.add_argument(
+        '--manual-tests',
+        type=str,
+        default=None,
+        help='指定要运行的手动测试类（逗号分隔，类名不含包名）'
+    )
+    parser.add_argument(
+        '--jmh-includes',
+        type=str,
+        default=None,
+        help='传给 org.openjdk.jmh.Main 的 include 列表（逗号分隔，默认用类全名）'
+    )
+    parser.add_argument('--jmh-golden', action='store_true', help='运行黄金基准集（com.chao.benchmark.jmh.*）')
+    parser.add_argument(
+        '--jmh-args',
+        type=str,
+        default=None,
+        help='追加传给 org.openjdk.jmh.Main 的参数（例如: -prof gc -wi 5 -i 10 -f 3）'
+    )
     args = parser.parse_args()
 
     # 环境检查
@@ -147,47 +171,70 @@ def main():
         result = subprocess.run(["java", "-version"], capture_output=True, text=True)
         log(result.stderr or result.stdout)
 
-        log(f"\n测试次数: {TEST_COUNT:,}\n")
+        log(f"\n测试次数(多数 case 内置): {TEST_COUNT:,}\n")
 
-        # 手动测试
-        log("=" * 60)
-        log("手动测试")
-        log("=" * 60)
+        manual_tests = MANUAL_TESTS
+        if args.manual_tests:
+            manual_tests = [s.strip() for s in args.manual_tests.split(',') if s.strip()]
 
-        for test in MANUAL_TESTS:
-            log(f"\n{'-' * 60}")
-            log(f"[{test}] 开始: {datetime.now().strftime('%H:%M:%S')}")
+        jmh_includes = None
+        if args.jmh_includes:
+            jmh_includes = [s.strip() for s in args.jmh_includes.split(',') if s.strip()]
+        if args.jmh_golden:
+            jmh_includes = GOLDEN_JMH_INCLUDES
 
-            output = run_java(test)
-            f.write(output)
+        jmh_args = None
+        if args.jmh_args:
+            jmh_args = [s for s in args.jmh_args.split() if s.strip()]
 
-            # 检查是否真的有错误
-            if "错误:" in output or "Exception" in output:
-                log(f"[失败] {test} 运行出错，见上文")
+        run_manual = not args.jmh_only
+        run_jmh = not args.manual_only
+
+        if run_manual:
+            log("=" * 60)
+            log("手动测试（main 入口）")
+            log("=" * 60)
+
+            for test in manual_tests:
+                log(f"\n{'-' * 60}")
+                log(f"[{test}] 开始: {datetime.now().strftime('%H:%M:%S')}")
+
+                output, code = run_java(test)
+                f.write(output)
+
+                if code != 0 or "错误:" in output or "Exception" in output:
+                    log(f"[失败] {test} 运行出错（exit={code}），见上文")
+                else:
+                    log(f"[成功] {test} 完成")
+
+                log(f"[{test}] 结束: {datetime.now().strftime('%H:%M:%S')}")
+
+        if run_jmh:
+            log(f"\n{'=' * 60}")
+            log("JMH 测试")
+            log(f"{'=' * 60}")
+
+            if not JMH_TESTS and not jmh_includes:
+                log("- 未配置 JMH 基准（可用 --jmh-includes 传入 include 模式）")
             else:
-                log(f"[成功] {test} 完成")
+                jmh_json = output_path / f"jmh-{timestamp}.json"
+                default_jmh_args = ["-rf", "json", "-rff", str(jmh_json), "-prof", "gc"]
+                effective_jmh_args = default_jmh_args + (jmh_args or [])
 
-            log(f"[{test}] 结束: {datetime.now().strftime('%H:%M:%S')}")
+                tests = JMH_TESTS if JMH_TESTS else ["<custom>"]
+                for test in tests:
+                    log(f"\n{'-' * 60}")
+                    log(f"[JMH {test}] 开始: {datetime.now().strftime('%H:%M:%S')}")
 
-        # JMH 测试
-        log(f"\n{'=' * 60}")
-        log("JMH测试（每个约6分钟）")
-        log(f"{'=' * 60}")
+                    output, code = run_java(test, is_jmh=True, jmh_includes=jmh_includes, jmh_args=effective_jmh_args)
+                    f.write(output)
 
-        for test in JMH_TESTS:
-            log(f"\n{'-' * 60}")
-            log(f"[JMH {test}] 开始: {datetime.now().strftime('%H:%M:%S')}")
-            log("[说明] 3 Forks x (5 Warmup + 10 Measurement)")
+                    if code != 0 or "错误:" in output or "ClassNotFoundException" in output:
+                        log(f"[失败] JMH {test} 运行出错（exit={code}）")
+                    else:
+                        log(f"[成功] JMH {test} 完成")
 
-            output = run_java(test, is_jmh=True)
-            f.write(output)
-
-            if "错误:" in output or "ClassNotFoundException" in output:
-                log(f"[失败] JMH {test} 运行出错")
-            else:
-                log(f"[成功] JMH {test} 完成")
-
-            log(f"[JMH {test}] 结束: {datetime.now().strftime('%H:%M:%S')}")
+                    log(f"[JMH {test}] 结束: {datetime.now().strftime('%H:%M:%S')}")
 
         log(f"\n测试完成: {datetime.now()}")
 

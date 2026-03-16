@@ -1,0 +1,1158 @@
+测试环境信息
+Python: 3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]
+Classpath: target\classes;target\dependency\*
+JDK版本:
+java version "17.0.16" 2025-07-15 LTS
+Java(TM) SE Runtime Environment (build 17.0.16+12-LTS-247)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.16+12-LTS-247, mixed mode, sharing)
+
+
+测试次数: 1,000,000
+
+============================================================
+手动测试
+============================================================
+
+------------------------------------------------------------
+[NoSpringChainBenchmark] 开始: 13:05:57
+开始无 Spring 依赖的验证链性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 218.0774 ns/op
+Fail-Fast 简单验证（无效数据）: 73.8164 ns/op
+Fail-Strict 简单验证（有效数据）: 74.6048 ns/op
+Fail-Strict 简单验证（无效数据）: 67.1989 ns/op
+传统 if-throw 简单验证（有效数据）: 499.1429 ns/op
+传统 if-throw 简单验证（无效数据）: 367.7725 ns/op
+========================================
+无 Spring 依赖的验证链性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] NoSpringChainBenchmark 完成
+[NoSpringChainBenchmark] 结束: 13:05:59
+
+------------------------------------------------------------
+[NoSpringTypedValidatorBenchmark] 开始: 13:05:59
+开始无 Spring 依赖的 TypedValidator 性能测试...
+测试次数: 1000000
+=======================================
+TypedValidator 字符串验证（有效数据）: 55.6792 ns/op
+TypedValidator 数值验证（有效数据）: 34.3926 ns/op
+传统 if-throw 字符串验证（有效数据）: 8.9448 ns/op
+传统 if-throw 字符串验证（无效数据）: 409.7002 ns/op
+传统 if-throw 数值验证（有效数据）: 2.3812 ns/op
+传统 if-throw 数值验证（无效数据）: 387.8522 ns/op
+=======================================
+无 Spring 依赖的 TypedValidator 性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] NoSpringTypedValidatorBenchmark 完成
+[NoSpringTypedValidatorBenchmark] 结束: 13:06:00
+
+------------------------------------------------------------
+[ManualTypedValidatorBenchmark] 开始: 13:06:00
+开始手动测试 TypedValidator 性能...
+测试次数: 1000000
+=======================================
+TypedValidator 字符串验证（有效数据）: 42.4861 ns/op
+TypedValidator 字符串验证（无效数据）: 166.2586 ns/op
+TypedValidator 数值验证（有效数据）: 28.0401 ns/op
+TypedValidator 数值验证（无效数据）: 91.7347 ns/op
+=======================================
+手动测试 TypedValidator 性能完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ManualTypedValidatorBenchmark 完成
+[ManualTypedValidatorBenchmark] 结束: 13:06:00
+
+------------------------------------------------------------
+[AopValidationBenchmark] 开始: 13:06:00
+开始 AOP 验证性能测试...
+测试次数: 1000000
+=======================================
+无验证方法: 3.3679 ns/op
+有验证方法（有效数据）: 209.2425 ns/op
+=======================================
+AOP 验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] AopValidationBenchmark 完成
+[AopValidationBenchmark] 结束: 13:06:00
+
+------------------------------------------------------------
+[BatchValidationBenchmark] 开始: 13:06:00
+开始批量验证性能测试...
+测试次数: 1000000
+批量大小: 100
+=======================================
+单个验证（有效数据）: 46.0287 ns/op
+批量验证（有效数据）: 21.8802 ns/op
+并行批量验证（有效数据）: 49.5799 ns/op
+=======================================
+批量验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] BatchValidationBenchmark 完成
+[BatchValidationBenchmark] 结束: 13:06:01
+
+------------------------------------------------------------
+[ChainValidationBenchmark] 开始: 13:06:01
+开始验证链性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 211.8156 ns/op
+Fail-Fast 简单验证（无效数据）: 158.9635 ns/op
+Fail-Strict 简单验证（有效数据）: 98.478 ns/op
+Fail-Strict 简单验证（无效数据）: 261.4696 ns/op
+传统 if-throw 简单验证（有效数据）: 756.9391 ns/op
+传统 if-throw 简单验证（无效数据）: 505.2303 ns/op
+========================================
+验证链性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ChainValidationBenchmark 完成
+[ChainValidationBenchmark] 结束: 13:06:03
+
+------------------------------------------------------------
+[ComplexObjectValidationBenchmark] 开始: 13:06:03
+开始复杂对象验证性能测试...
+测试次数: 1000000
+=======================================
+嵌套对象验证（有效数据）: 158.9436 ns/op
+集合类型验证（有效数据）: 93.3345 ns/op
+=======================================
+复杂对象验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ComplexObjectValidationBenchmark 完成
+[ComplexObjectValidationBenchmark] 结束: 13:06:03
+
+------------------------------------------------------------
+[ConcurrentValidationBenchmark] 开始: 13:06:03
+开始并发验证性能测试...
+测试次数: 1000000
+=======================================
+测试线程数: 1
+  有效数据: 768.2523 ns/op
+
+测试线程数: 2
+  有效数据: 168.9233 ns/op
+
+测试线程数: 4
+  有效数据: 134.8228 ns/op
+
+测试线程数: 8
+  有效数据: 98.1231 ns/op
+
+测试线程数: 16
+  有效数据: 103.2486 ns/op
+
+=======================================
+并发验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ConcurrentValidationBenchmark 完成
+[ConcurrentValidationBenchmark] 结束: 13:06:06
+
+------------------------------------------------------------
+[CoreValidationBenchmark] 开始: 13:06:06
+开始核心性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 1060.5105 ns/op
+Fail-Fast 简单验证（无效数据）: 949.3092 ns/op
+Fail-Strict 简单验证（有效数据）: 588.3956 ns/op
+Fail-Strict 简单验证（无效数据）: 930.2391 ns/op
+传统 if-throw 简单验证（有效数据）: 1091.3733 ns/op
+传统 if-throw 简单验证（无效数据）: 1096.8237 ns/op
+Fail-Fast 复杂验证（有效数据）: 257.3098 ns/op
+Fail-Fast 复杂验证（无效数据）: 341.6937 ns/op
+========================================
+核心性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] CoreValidationBenchmark 完成
+[CoreValidationBenchmark] 结束: 13:06:13
+
+------------------------------------------------------------
+[I18nValidationBenchmark] 开始: 13:06:13
+开始国际化验证性能测试...
+测试次数: 1000000
+=======================================
+普通消息验证（有效数据）: 344.6131 ns/op
+国际化消息验证（有效数据）: 132.5764 ns/op
+=======================================
+国际化验证性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] I18nValidationBenchmark 完成
+[I18nValidationBenchmark] 结束: 13:06:13
+
+------------------------------------------------------------
+[ReflectionCacheBenchmark] 开始: 13:06:13
+开始反射缓存性能测试...
+测试次数: 1000000
+=======================================
+首次验证（有效数据）: 1.42296E7 ns/op
+后续验证（有效数据）: 44.784 ns/op
+=======================================
+反射缓存性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ReflectionCacheBenchmark 完成
+[ReflectionCacheBenchmark] 结束: 13:06:13
+
+------------------------------------------------------------
+[SimpleValidationBenchmark] 开始: 13:06:13
+开始性能测试...
+测试次数: 1000000
+========================================
+Fail-Fast 简单验证（有效数据）: 345.9433 ns/op
+Fail-Fast 简单验证（无效数据）: 350.1808 ns/op
+Fail-Strict 简单验证（有效数据）: 159.1401 ns/op
+Fail-Strict 简单验证（无效数据）: 754.5733 ns/op
+传统 if-throw 简单验证（有效数据）: 786.1175 ns/op
+传统 if-throw 简单验证（无效数据）: 545.1009 ns/op
+Fail-Fast 复杂验证（有效数据）: 152.1098 ns/op
+Fail-Fast 复杂验证（无效数据）: 265.0093 ns/op
+========================================
+性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] SimpleValidationBenchmark 完成
+[SimpleValidationBenchmark] 结束: 13:06:17
+
+------------------------------------------------------------
+[SpringIntegrationBenchmark] 开始: 13:06:17
+开始 Spring 集成性能测试...
+测试次数: 1000000
+=======================================
+原生验证（有效数据）: 315.8768 ns/op
+Spring AOP 验证（有效数据）: 337.0994 ns/op
+=======================================
+Spring 集成性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] SpringIntegrationBenchmark 完成
+[SpringIntegrationBenchmark] 结束: 13:06:18
+
+------------------------------------------------------------
+[ValidationChecksBenchmark] 开始: 13:06:18
+开始验证检查性能测试...
+测试次数: 1000000
+========================================
+字符串非空检查（有效数据）: 24.6257 ns/op
+字符串非空检查（无效数据）: 7.1699 ns/op
+邮箱格式检查（有效数据）: 265.9038 ns/op
+邮箱格式检查（无效数据）: 257.1081 ns/op
+数值大于等于检查（有效数据）: 12.5875 ns/op
+数值大于等于检查（无效数据）: 8.6253 ns/op
+字符串长度最小检查（有效数据）: 5.6492 ns/op
+字符串长度最小检查（无效数据）: 3.8003 ns/op
+========================================
+验证检查性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ValidationChecksBenchmark 完成
+[ValidationChecksBenchmark] 结束: 13:06:18
+
+------------------------------------------------------------
+[ValidationRulesCombinationBenchmark] 开始: 13:06:18
+开始验证规则组合性能测试...
+测试次数: 1000000
+=======================================
+少量验证规则（有效数据）: 327.8182 ns/op
+中量验证规则（有效数据）: 135.1158 ns/op
+大量验证规则（有效数据）: 142.746 ns/op
+=======================================
+验证规则组合性能测试完成！
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] ValidationRulesCombinationBenchmark 完成
+[ValidationRulesCombinationBenchmark] 结束: 13:06:19
+
+============================================================
+JMH测试（每个约6分钟）
+============================================================
+
+------------------------------------------------------------
+[JMH TypedValidatorBenchmark] 开始: 13:06:19
+[说明] 3 Forks x (5 Warmup + 10 Measurement)
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTraditionalNumberInvalid
+
+# Run progress: 0.00% complete, ETA 00:06:00
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 1189.849 ns/op
+# Warmup Iteration   2: 1144.195 ns/op
+# Warmup Iteration   3: 1390.881 ns/op
+# Warmup Iteration   4: 1048.050 ns/op
+# Warmup Iteration   5: 986.686 ns/op
+Iteration   1: 943.183 ns/op
+Iteration   2: 934.146 ns/op
+Iteration   3: 918.706 ns/op
+Iteration   4: 925.569 ns/op
+Iteration   5: 951.091 ns/op
+Iteration   6: 1003.053 ns/op
+Iteration   7: 939.199 ns/op
+Iteration   8: 926.018 ns/op
+Iteration   9: 923.175 ns/op
+Iteration  10: 922.458 ns/op
+
+# Run progress: 4.17% complete, ETA 00:06:00
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 1013.102 ns/op
+# Warmup Iteration   2: 1093.591 ns/op
+# Warmup Iteration   3: 1054.274 ns/op
+# Warmup Iteration   4: 948.193 ns/op
+# Warmup Iteration   5: 931.928 ns/op
+Iteration   1: 931.560 ns/op
+Iteration   2: 941.940 ns/op
+Iteration   3: 927.879 ns/op
+Iteration   4: 864.747 ns/op
+Iteration   5: 848.655 ns/op
+Iteration   6: 853.241 ns/op
+Iteration   7: 838.638 ns/op
+Iteration   8: 846.723 ns/op
+Iteration   9: 856.793 ns/op
+Iteration  10: 846.443 ns/op
+
+# Run progress: 8.33% complete, ETA 00:05:42
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 922.463 ns/op
+# Warmup Iteration   2: 850.986 ns/op
+# Warmup Iteration   3: 843.788 ns/op
+# Warmup Iteration   4: 847.534 ns/op
+# Warmup Iteration   5: 876.546 ns/op
+Iteration   1: 867.092 ns/op
+Iteration   2: 843.675 ns/op
+Iteration   3: 846.846 ns/op
+Iteration   4: 862.595 ns/op
+Iteration   5: 842.707 ns/op
+Iteration   6: 853.140 ns/op
+Iteration   7: 846.550 ns/op
+Iteration   8: 839.216 ns/op
+Iteration   9: 801.495 ns/op
+Iteration  10: 800.971 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTraditionalNumberInvalid":
+  884.917 ±(99.9%) 33.898 ns/op [Average]
+  (min, avg, max) = (800.971, 884.917, 1003.053), stdev = 50.736
+  CI (99.9%): [851.019, 918.814] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTraditionalNumberValid
+
+# Run progress: 12.50% complete, ETA 00:05:26
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 0.372 ns/op
+# Warmup Iteration   2: 0.359 ns/op
+# Warmup Iteration   3: 0.359 ns/op
+# Warmup Iteration   4: 0.427 ns/op
+# Warmup Iteration   5: 0.344 ns/op
+Iteration   1: 0.360 ns/op
+Iteration   2: 0.327 ns/op
+Iteration   3: 0.334 ns/op
+Iteration   4: 0.327 ns/op
+Iteration   5: 0.327 ns/op
+Iteration   6: 0.326 ns/op
+Iteration   7: 0.360 ns/op
+Iteration   8: 0.346 ns/op
+Iteration   9: 0.349 ns/op
+Iteration  10: 0.349 ns/op
+
+# Run progress: 16.67% complete, ETA 00:05:10
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 0.395 ns/op
+# Warmup Iteration   2: 0.384 ns/op
+# Warmup Iteration   3: 0.407 ns/op
+# Warmup Iteration   4: 0.313 ns/op
+# Warmup Iteration   5: 0.328 ns/op
+Iteration   1: 0.323 ns/op
+Iteration   2: 0.331 ns/op
+Iteration   3: 0.319 ns/op
+Iteration   4: 0.338 ns/op
+Iteration   5: 0.349 ns/op
+Iteration   6: 0.320 ns/op
+Iteration   7: 0.318 ns/op
+Iteration   8: 0.354 ns/op
+Iteration   9: 0.316 ns/op
+Iteration  10: 0.343 ns/op
+
+# Run progress: 20.83% complete, ETA 00:04:54
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 0.373 ns/op
+# Warmup Iteration   2: 0.324 ns/op
+# Warmup Iteration   3: 0.320 ns/op
+# Warmup Iteration   4: 0.318 ns/op
+# Warmup Iteration   5: 0.329 ns/op
+Iteration   1: 0.326 ns/op
+Iteration   2: 0.317 ns/op
+Iteration   3: 0.321 ns/op
+Iteration   4: 0.323 ns/op
+Iteration   5: 0.349 ns/op
+Iteration   6: 0.316 ns/op
+Iteration   7: 0.320 ns/op
+Iteration   8: 0.328 ns/op
+Iteration   9: 0.355 ns/op
+Iteration  10: 0.318 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTraditionalNumberValid":
+  0.333 ±(99.9%) 0.010 ns/op [Average]
+  (min, avg, max) = (0.316, 0.333, 0.360), stdev = 0.014
+  CI (99.9%): [0.323, 0.343] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTraditionalStringInvalid
+
+# Run progress: 25.00% complete, ETA 00:04:39
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 792.360 ns/op
+# Warmup Iteration   2: 787.112 ns/op
+# Warmup Iteration   3: 798.053 ns/op
+# Warmup Iteration   4: 768.549 ns/op
+# Warmup Iteration   5: 752.528 ns/op
+Iteration   1: 773.733 ns/op
+Iteration   2: 769.390 ns/op
+Iteration   3: 768.545 ns/op
+Iteration   4: 758.642 ns/op
+Iteration   5: 766.881 ns/op
+Iteration   6: 768.067 ns/op
+Iteration   7: 763.937 ns/op
+Iteration   8: 769.971 ns/op
+Iteration   9: 768.200 ns/op
+Iteration  10: 763.961 ns/op
+
+# Run progress: 29.17% complete, ETA 00:04:23
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 814.081 ns/op
+# Warmup Iteration   2: 854.344 ns/op
+# Warmup Iteration   3: 837.623 ns/op
+# Warmup Iteration   4: 769.554 ns/op
+# Warmup Iteration   5: 760.900 ns/op
+Iteration   1: 758.777 ns/op
+Iteration   2: 765.343 ns/op
+Iteration   3: 768.922 ns/op
+Iteration   4: 763.565 ns/op
+Iteration   5: 784.293 ns/op
+Iteration   6: 780.677 ns/op
+Iteration   7: 768.317 ns/op
+Iteration   8: 763.711 ns/op
+Iteration   9: 764.254 ns/op
+Iteration  10: 778.029 ns/op
+
+# Run progress: 33.33% complete, ETA 00:04:08
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 811.809 ns/op
+# Warmup Iteration   2: 763.612 ns/op
+# Warmup Iteration   3: 769.717 ns/op
+# Warmup Iteration   4: 763.413 ns/op
+# Warmup Iteration   5: 766.471 ns/op
+Iteration   1: 761.809 ns/op
+Iteration   2: 765.925 ns/op
+Iteration   3: 770.164 ns/op
+Iteration   4: 759.322 ns/op
+Iteration   5: 763.527 ns/op
+Iteration   6: 762.758 ns/op
+Iteration   7: 758.130 ns/op
+Iteration   8: 764.644 ns/op
+Iteration   9: 763.413 ns/op
+Iteration  10: 766.148 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTraditionalStringInvalid":
+  766.769 ±(99.9%) 4.097 ns/op [Average]
+  (min, avg, max) = (758.130, 766.769, 784.293), stdev = 6.132
+  CI (99.9%): [762.672, 770.865] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTraditionalStringValid
+
+# Run progress: 37.50% complete, ETA 00:03:52
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 1.269 ns/op
+# Warmup Iteration   2: 1.175 ns/op
+# Warmup Iteration   3: 1.273 ns/op
+# Warmup Iteration   4: 1.274 ns/op
+# Warmup Iteration   5: 1.286 ns/op
+Iteration   1: 1.205 ns/op
+Iteration   2: 1.232 ns/op
+Iteration   3: 1.176 ns/op
+Iteration   4: 1.174 ns/op
+Iteration   5: 1.173 ns/op
+Iteration   6: 1.174 ns/op
+Iteration   7: 1.170 ns/op
+Iteration   8: 1.206 ns/op
+Iteration   9: 1.162 ns/op
+Iteration  10: 1.172 ns/op
+
+# Run progress: 41.67% complete, ETA 00:03:36
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 1.211 ns/op
+# Warmup Iteration   2: 1.195 ns/op
+# Warmup Iteration   3: 1.179 ns/op
+# Warmup Iteration   4: 1.176 ns/op
+# Warmup Iteration   5: 1.179 ns/op
+Iteration   1: 1.212 ns/op
+Iteration   2: 1.176 ns/op
+Iteration   3: 1.180 ns/op
+Iteration   4: 1.183 ns/op
+Iteration   5: 1.183 ns/op
+Iteration   6: 1.176 ns/op
+Iteration   7: 1.174 ns/op
+Iteration   8: 1.191 ns/op
+Iteration   9: 1.185 ns/op
+Iteration  10: 1.225 ns/op
+
+# Run progress: 45.83% complete, ETA 00:03:21
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 1.430 ns/op
+# Warmup Iteration   2: 1.321 ns/op
+# Warmup Iteration   3: 1.201 ns/op
+# Warmup Iteration   4: 1.187 ns/op
+# Warmup Iteration   5: 1.197 ns/op
+Iteration   1: 1.195 ns/op
+Iteration   2: 1.178 ns/op
+Iteration   3: 1.173 ns/op
+Iteration   4: 1.187 ns/op
+Iteration   5: 1.176 ns/op
+Iteration   6: 1.180 ns/op
+Iteration   7: 1.168 ns/op
+Iteration   8: 1.224 ns/op
+Iteration   9: 1.175 ns/op
+Iteration  10: 1.221 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTraditionalStringValid":
+  1.187 ±(99.9%) 0.013 ns/op [Average]
+  (min, avg, max) = (1.162, 1.187, 1.232), stdev = 0.019
+  CI (99.9%): [1.174, 1.200] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorNumberInvalid
+
+# Run progress: 50.00% complete, ETA 00:03:05
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 61.076 ns/op
+# Warmup Iteration   2: 50.838 ns/op
+# Warmup Iteration   3: 49.137 ns/op
+# Warmup Iteration   4: 49.566 ns/op
+# Warmup Iteration   5: 50.205 ns/op
+Iteration   1: 51.299 ns/op
+Iteration   2: 49.432 ns/op
+Iteration   3: 49.388 ns/op
+Iteration   4: 49.162 ns/op
+Iteration   5: 49.126 ns/op
+Iteration   6: 48.948 ns/op
+Iteration   7: 49.831 ns/op
+Iteration   8: 57.296 ns/op
+Iteration   9: 57.352 ns/op
+Iteration  10: 49.409 ns/op
+
+# Run progress: 54.17% complete, ETA 00:02:50
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 61.326 ns/op
+# Warmup Iteration   2: 50.825 ns/op
+# Warmup Iteration   3: 50.273 ns/op
+# Warmup Iteration   4: 50.033 ns/op
+# Warmup Iteration   5: 50.415 ns/op
+Iteration   1: 50.380 ns/op
+Iteration   2: 50.053 ns/op
+Iteration   3: 49.961 ns/op
+Iteration   4: 49.967 ns/op
+Iteration   5: 50.175 ns/op
+Iteration   6: 50.238 ns/op
+Iteration   7: 49.987 ns/op
+Iteration   8: 49.799 ns/op
+Iteration   9: 52.553 ns/op
+Iteration  10: 50.877 ns/op
+
+# Run progress: 58.33% complete, ETA 00:02:34
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 62.763 ns/op
+# Warmup Iteration   2: 49.489 ns/op
+# Warmup Iteration   3: 50.254 ns/op
+# Warmup Iteration   4: 49.571 ns/op
+# Warmup Iteration   5: 49.633 ns/op
+Iteration   1: 50.129 ns/op
+Iteration   2: 49.354 ns/op
+Iteration   3: 49.458 ns/op
+Iteration   4: 48.971 ns/op
+Iteration   5: 49.114 ns/op
+Iteration   6: 49.595 ns/op
+Iteration   7: 49.494 ns/op
+Iteration   8: 49.720 ns/op
+Iteration   9: 49.765 ns/op
+Iteration  10: 49.356 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorNumberInvalid":
+  50.340 ±(99.9%) 1.361 ns/op [Average]
+  (min, avg, max) = (48.948, 50.340, 57.352), stdev = 2.036
+  CI (99.9%): [48.979, 51.700] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorNumberValid
+
+# Run progress: 62.50% complete, ETA 00:02:19
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 9.693 ns/op
+# Warmup Iteration   2: 7.177 ns/op
+# Warmup Iteration   3: 6.364 ns/op
+# Warmup Iteration   4: 6.279 ns/op
+# Warmup Iteration   5: 6.271 ns/op
+Iteration   1: 6.310 ns/op
+Iteration   2: 6.273 ns/op
+Iteration   3: 6.380 ns/op
+Iteration   4: 6.304 ns/op
+Iteration   5: 6.307 ns/op
+Iteration   6: 6.423 ns/op
+Iteration   7: 6.311 ns/op
+Iteration   8: 6.275 ns/op
+Iteration   9: 6.234 ns/op
+Iteration  10: 6.259 ns/op
+
+# Run progress: 66.67% complete, ETA 00:02:03
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 7.634 ns/op
+# Warmup Iteration   2: 6.461 ns/op
+# Warmup Iteration   3: 6.533 ns/op
+# Warmup Iteration   4: 6.292 ns/op
+# Warmup Iteration   5: 6.241 ns/op
+Iteration   1: 6.255 ns/op
+Iteration   2: 6.228 ns/op
+Iteration   3: 6.222 ns/op
+Iteration   4: 6.220 ns/op
+Iteration   5: 6.218 ns/op
+Iteration   6: 6.206 ns/op
+Iteration   7: 6.322 ns/op
+Iteration   8: 6.134 ns/op
+Iteration   9: 6.207 ns/op
+Iteration  10: 6.198 ns/op
+
+# Run progress: 70.83% complete, ETA 00:01:48
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 7.866 ns/op
+# Warmup Iteration   2: 6.671 ns/op
+# Warmup Iteration   3: 6.251 ns/op
+# Warmup Iteration   4: 6.271 ns/op
+# Warmup Iteration   5: 6.267 ns/op
+Iteration   1: 6.232 ns/op
+Iteration   2: 6.237 ns/op
+Iteration   3: 6.264 ns/op
+Iteration   4: 6.279 ns/op
+Iteration   5: 6.260 ns/op
+Iteration   6: 6.230 ns/op
+Iteration   7: 6.325 ns/op
+Iteration   8: 6.474 ns/op
+Iteration   9: 6.429 ns/op
+Iteration  10: 6.318 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorNumberValid":
+  6.278 ±(99.9%) 0.050 ns/op [Average]
+  (min, avg, max) = (6.134, 6.278, 6.474), stdev = 0.075
+  CI (99.9%): [6.228, 6.328] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorStringInvalid
+
+# Run progress: 75.00% complete, ETA 00:01:32
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 64.726 ns/op
+# Warmup Iteration   2: 51.513 ns/op
+# Warmup Iteration   3: 51.550 ns/op
+# Warmup Iteration   4: 51.217 ns/op
+# Warmup Iteration   5: 52.589 ns/op
+Iteration   1: 50.804 ns/op
+Iteration   2: 50.372 ns/op
+Iteration   3: 48.894 ns/op
+Iteration   4: 49.141 ns/op
+Iteration   5: 49.937 ns/op
+Iteration   6: 48.641 ns/op
+Iteration   7: 53.866 ns/op
+Iteration   8: 49.557 ns/op
+Iteration   9: 49.858 ns/op
+Iteration  10: 49.963 ns/op
+
+# Run progress: 79.17% complete, ETA 00:01:17
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 67.349 ns/op
+# Warmup Iteration   2: 50.653 ns/op
+# Warmup Iteration   3: 48.989 ns/op
+# Warmup Iteration   4: 48.856 ns/op
+# Warmup Iteration   5: 48.595 ns/op
+Iteration   1: 51.322 ns/op
+Iteration   2: 49.179 ns/op
+Iteration   3: 52.867 ns/op
+Iteration   4: 55.404 ns/op
+Iteration   5: 51.644 ns/op
+Iteration   6: 49.221 ns/op
+Iteration   7: 48.814 ns/op
+Iteration   8: 49.491 ns/op
+Iteration   9: 48.664 ns/op
+Iteration  10: 48.832 ns/op
+
+# Run progress: 83.33% complete, ETA 00:01:01
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 67.454 ns/op
+# Warmup Iteration   2: 50.716 ns/op
+# Warmup Iteration   3: 48.692 ns/op
+# Warmup Iteration   4: 48.637 ns/op
+# Warmup Iteration   5: 48.608 ns/op
+Iteration   1: 48.527 ns/op
+Iteration   2: 48.500 ns/op
+Iteration   3: 48.731 ns/op
+Iteration   4: 51.196 ns/op
+Iteration   5: 51.310 ns/op
+Iteration   6: 49.699 ns/op
+Iteration   7: 48.600 ns/op
+Iteration   8: 48.183 ns/op
+Iteration   9: 48.684 ns/op
+Iteration  10: 48.180 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorStringInvalid":
+  49.936 ±(99.9%) 1.158 ns/op [Average]
+  (min, avg, max) = (48.180, 49.936, 55.404), stdev = 1.734
+  CI (99.9%): [48.778, 51.094] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorStringValid
+
+# Run progress: 87.50% complete, ETA 00:00:46
+# Fork: 1 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 7.422 ns/op
+# Warmup Iteration   2: 6.618 ns/op
+# Warmup Iteration   3: 5.988 ns/op
+# Warmup Iteration   4: 5.939 ns/op
+# Warmup Iteration   5: 5.956 ns/op
+Iteration   1: 5.966 ns/op
+Iteration   2: 5.952 ns/op
+Iteration   3: 5.984 ns/op
+Iteration   4: 5.999 ns/op
+Iteration   5: 5.971 ns/op
+Iteration   6: 6.131 ns/op
+Iteration   7: 5.939 ns/op
+Iteration   8: 6.147 ns/op
+Iteration   9: 6.001 ns/op
+Iteration  10: 6.007 ns/op
+
+# Run progress: 91.67% complete, ETA 00:00:30
+# Fork: 2 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 7.549 ns/op
+# Warmup Iteration   2: 6.639 ns/op
+# Warmup Iteration   3: 6.014 ns/op
+# Warmup Iteration   4: 6.010 ns/op
+# Warmup Iteration   5: 6.006 ns/op
+Iteration   1: 5.980 ns/op
+Iteration   2: 5.973 ns/op
+Iteration   3: 6.001 ns/op
+Iteration   4: 5.931 ns/op
+Iteration   5: 5.957 ns/op
+Iteration   6: 5.915 ns/op
+Iteration   7: 6.013 ns/op
+Iteration   8: 6.269 ns/op
+Iteration   9: 6.046 ns/op
+Iteration  10: 5.943 ns/op
+
+# Run progress: 95.83% complete, ETA 00:00:15
+# Fork: 3 of 3
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+# Warmup Iteration   1: 7.273 ns/op
+# Warmup Iteration   2: 6.521 ns/op
+# Warmup Iteration   3: 5.914 ns/op
+# Warmup Iteration   4: 5.991 ns/op
+# Warmup Iteration   5: 5.956 ns/op
+Iteration   1: 5.983 ns/op
+Iteration   2: 6.080 ns/op
+Iteration   3: 6.111 ns/op
+Iteration   4: 5.946 ns/op
+Iteration   5: 5.992 ns/op
+Iteration   6: 5.998 ns/op
+Iteration   7: 5.959 ns/op
+Iteration   8: 6.221 ns/op
+Iteration   9: 5.978 ns/op
+Iteration  10: 5.967 ns/op
+
+
+Result "com.chao.benchmark.TypedValidatorBenchmark.testTypedValidatorStringValid":
+  6.012 ±(99.9%) 0.057 ns/op [Average]
+  (min, avg, max) = (5.915, 6.012, 6.269), stdev = 0.085
+  CI (99.9%): [5.955, 6.069] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:06:11
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                                Mode  Cnt    Score    Error  Units
+TypedValidatorBenchmark.testTraditionalNumberInvalid     avgt   30  884.917 ± 33.898  ns/op
+TypedValidatorBenchmark.testTraditionalNumberValid       avgt   30    0.333 ±  0.010  ns/op
+TypedValidatorBenchmark.testTraditionalStringInvalid     avgt   30  766.769 ±  4.097  ns/op
+TypedValidatorBenchmark.testTraditionalStringValid       avgt   30    1.187 ±  0.013  ns/op
+TypedValidatorBenchmark.testTypedValidatorNumberInvalid  avgt   30   50.340 ±  1.361  ns/op
+TypedValidatorBenchmark.testTypedValidatorNumberValid    avgt   30    6.278 ±  0.050  ns/op
+TypedValidatorBenchmark.testTypedValidatorStringInvalid  avgt   30   49.936 ±  1.158  ns/op
+TypedValidatorBenchmark.testTypedValidatorStringValid    avgt   30    6.012 ±  0.057  ns/op
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] JMH TypedValidatorBenchmark 完成
+[JMH TypedValidatorBenchmark] 结束: 13:12:32
+
+------------------------------------------------------------
+[JMH HibernateValidatorComparisonBenchmark] 开始: 13:12:32
+[说明] 3 Forks x (5 Warmup + 10 Measurement)
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailFastInvalid
+
+# Run progress: 0.00% complete, ETA 00:01:30
+# Fork: N/A, test runs in the host VM
+# *** WARNING: Non-forked runs may silently omit JVM options, mess up profilers, disable compiler hints, etc. ***
+# *** WARNING: Use non-forked runs only for debugging purposes, not for actual performance runs. ***
+# Warmup Iteration   1: 13:12:32.624 [com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailFastInvalid-jmh-worker-1] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+244.006 ns/op
+# Warmup Iteration   2: 173.535 ns/op
+# Warmup Iteration   3: 168.917 ns/op
+# Warmup Iteration   4: 167.403 ns/op
+# Warmup Iteration   5: 169.208 ns/op
+Iteration   1: 166.363 ns/op
+Iteration   2: 167.893 ns/op
+Iteration   3: 168.937 ns/op
+Iteration   4: 170.748 ns/op
+Iteration   5: 178.510 ns/op
+Iteration   6: 170.763 ns/op
+Iteration   7: 168.444 ns/op
+Iteration   8: 168.944 ns/op
+Iteration   9: 169.497 ns/op
+Iteration  10: 167.494 ns/op
+
+Result "com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailFastInvalid":
+  169.759 ±(99.9%) 5.086 ns/op [Average]
+  (min, avg, max) = (166.363, 169.759, 178.510), stdev = 3.364
+  CI (99.9%): [164.674, 174.845] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailFastValid
+
+# Run progress: 16.67% complete, ETA 00:01:17
+# Fork: N/A, test runs in the host VM
+# *** WARNING: Non-forked runs may silently omit JVM options, mess up profilers, disable compiler hints, etc. ***
+# *** WARNING: Use non-forked runs only for debugging purposes, not for actual performance runs. ***
+# Warmup Iteration   1: 112.271 ns/op
+# Warmup Iteration   2: 108.397 ns/op
+# Warmup Iteration   3: 105.433 ns/op
+# Warmup Iteration   4: 104.180 ns/op
+# Warmup Iteration   5: 107.397 ns/op
+Iteration   1: 104.624 ns/op
+Iteration   2: 110.025 ns/op
+Iteration   3: 105.457 ns/op
+Iteration   4: 111.622 ns/op
+Iteration   5: 106.656 ns/op
+Iteration   6: 104.261 ns/op
+Iteration   7: 105.421 ns/op
+Iteration   8: 111.275 ns/op
+Iteration   9: 105.982 ns/op
+Iteration  10: 109.755 ns/op
+
+Result "com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailFastValid":
+  107.508 ±(99.9%) 4.305 ns/op [Average]
+  (min, avg, max) = (104.261, 107.508, 111.622), stdev = 2.848
+  CI (99.9%): [103.203, 111.813] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailStrictInvalid
+
+# Run progress: 33.33% complete, ETA 00:01:01
+# Fork: N/A, test runs in the host VM
+# *** WARNING: Non-forked runs may silently omit JVM options, mess up profilers, disable compiler hints, etc. ***
+# *** WARNING: Use non-forked runs only for debugging purposes, not for actual performance runs. ***
+# Warmup Iteration   1: 348.852 ns/op
+# Warmup Iteration   2: 323.587 ns/op
+# Warmup Iteration   3: 325.817 ns/op
+# Warmup Iteration   4: 323.232 ns/op
+# Warmup Iteration   5: 328.439 ns/op
+Iteration   1: 327.292 ns/op
+Iteration   2: 322.748 ns/op
+Iteration   3: 323.184 ns/op
+Iteration   4: 323.434 ns/op
+Iteration   5: 323.603 ns/op
+Iteration   6: 321.281 ns/op
+Iteration   7: 323.765 ns/op
+Iteration   8: 322.534 ns/op
+Iteration   9: 323.352 ns/op
+Iteration  10: 333.519 ns/op
+
+Result "com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailStrictInvalid":
+  324.471 ±(99.9%) 5.332 ns/op [Average]
+  (min, avg, max) = (321.281, 324.471, 333.519), stdev = 3.527
+  CI (99.9%): [319.139, 329.804] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailStrictValid
+
+# Run progress: 50.00% complete, ETA 00:00:45
+# Fork: N/A, test runs in the host VM
+# *** WARNING: Non-forked runs may silently omit JVM options, mess up profilers, disable compiler hints, etc. ***
+# *** WARNING: Use non-forked runs only for debugging purposes, not for actual performance runs. ***
+# Warmup Iteration   1: 117.881 ns/op
+# Warmup Iteration   2: 112.390 ns/op
+# Warmup Iteration   3: 108.710 ns/op
+# Warmup Iteration   4: 109.290 ns/op
+# Warmup Iteration   5: 108.592 ns/op
+Iteration   1: 117.275 ns/op
+Iteration   2: 112.876 ns/op
+Iteration   3: 115.227 ns/op
+Iteration   4: 113.942 ns/op
+Iteration   5: 117.705 ns/op
+Iteration   6: 120.199 ns/op
+Iteration   7: 113.032 ns/op
+Iteration   8: 113.154 ns/op
+Iteration   9: 115.966 ns/op
+Iteration  10: 109.793 ns/op
+
+Result "com.chao.benchmark.HibernateValidatorComparisonBenchmark.testFailStrictValid":
+  114.917 ±(99.9%) 4.521 ns/op [Average]
+  (min, avg, max) = (109.793, 114.917, 120.199), stdev = 2.990
+  CI (99.9%): [110.396, 119.438] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.HibernateValidatorComparisonBenchmark.testHibernateValidatorInvalid
+
+# Run progress: 66.67% complete, ETA 00:00:30
+# Fork: N/A, test runs in the host VM
+# *** WARNING: Non-forked runs may silently omit JVM options, mess up profilers, disable compiler hints, etc. ***
+# *** WARNING: Use non-forked runs only for debugging purposes, not for actual performance runs. ***
+# Warmup Iteration   1: 3745.564 ns/op
+# Warmup Iteration   2: 1203.033 ns/op
+# Warmup Iteration   3: 1037.518 ns/op
+# Warmup Iteration   4: 1024.549 ns/op
+# Warmup Iteration   5: 1041.616 ns/op
+Iteration   1: 1029.501 ns/op
+Iteration   2: 1037.818 ns/op
+Iteration   3: 1038.259 ns/op
+Iteration   4: 1027.094 ns/op
+Iteration   5: 1032.045 ns/op
+Iteration   6: 1029.671 ns/op
+Iteration   7: 1072.056 ns/op
+Iteration   8: 1035.907 ns/op
+Iteration   9: 1026.986 ns/op
+Iteration  10: 1025.530 ns/op
+
+Result "com.chao.benchmark.HibernateValidatorComparisonBenchmark.testHibernateValidatorInvalid":
+  1035.487 ±(99.9%) 20.618 ns/op [Average]
+  (min, avg, max) = (1025.530, 1035.487, 1072.056), stdev = 13.638
+  CI (99.9%): [1014.868, 1056.105] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.16, Java HotSpot(TM) 64-Bit Server VM, 17.0.16+12-LTS-247
+# VM invoker: C:\Program Files\Java\jdk-17\bin\java.exe
+# VM options: -Dfile.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.chao.benchmark.HibernateValidatorComparisonBenchmark.testHibernateValidatorValid
+
+# Run progress: 83.33% complete, ETA 00:00:15
+# Fork: N/A, test runs in the host VM
+# *** WARNING: Non-forked runs may silently omit JVM options, mess up profilers, disable compiler hints, etc. ***
+# *** WARNING: Use non-forked runs only for debugging purposes, not for actual performance runs. ***
+# Warmup Iteration   1: 3071.631 ns/op
+# Warmup Iteration   2: 1800.949 ns/op
+# Warmup Iteration   3: 1736.888 ns/op
+# Warmup Iteration   4: 1731.584 ns/op
+# Warmup Iteration   5: 1809.093 ns/op
+Iteration   1: 1753.542 ns/op
+Iteration   2: 1796.361 ns/op
+Iteration   3: 1814.362 ns/op
+Iteration   4: 1856.331 ns/op
+Iteration   5: 1817.543 ns/op
+Iteration   6: 1736.644 ns/op
+Iteration   7: 1771.439 ns/op
+Iteration   8: 1740.075 ns/op
+Iteration   9: 1755.325 ns/op
+Iteration  10: 1700.219 ns/op
+
+Result "com.chao.benchmark.HibernateValidatorComparisonBenchmark.testHibernateValidatorValid":
+  1774.184 ±(99.9%) 70.494 ns/op [Average]
+  (min, avg, max) = (1700.219, 1774.184, 1856.331), stdev = 46.628
+  CI (99.9%): [1703.690, 1844.678] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:01:31
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                                            Mode  Cnt     Score    Error  Units
+HibernateValidatorComparisonBenchmark.testFailFastInvalid            avgt   10   169.759 ±  5.086  ns/op
+HibernateValidatorComparisonBenchmark.testFailFastValid              avgt   10   107.508 ±  4.305  ns/op
+HibernateValidatorComparisonBenchmark.testFailStrictInvalid          avgt   10   324.471 ±  5.332  ns/op
+HibernateValidatorComparisonBenchmark.testFailStrictValid            avgt   10   114.917 ±  4.521  ns/op
+HibernateValidatorComparisonBenchmark.testHibernateValidatorInvalid  avgt   10  1035.487 ± 20.618  ns/op
+HibernateValidatorComparisonBenchmark.testHibernateValidatorValid    avgt   10  1774.184 ± 70.494  ns/op
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+[成功] JMH HibernateValidatorComparisonBenchmark 完成
+[JMH HibernateValidatorComparisonBenchmark] 结束: 13:14:03
+
+测试完成: 2026-03-15 13:14:03.672101
