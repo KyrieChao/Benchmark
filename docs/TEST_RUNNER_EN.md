@@ -46,11 +46,11 @@ mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
 
 Or<br/>
 ### Run with [run_benchmarks](../run_benchmarks.py) script
-![img.png](../images/img.png)
-![img.png](../images/img2.png)
+![img.png](images/img.png)
+![img.png](images/img2.png)
 ### Script analysis [analyze](../analyze.py) 
-![img.png](../images/img3.png)
-![img.png](../images/img4.png)
+![img.png](images/img3.png)
+![img.png](images/img4.png)
 
 **run_benchmarks.py parameters**
 

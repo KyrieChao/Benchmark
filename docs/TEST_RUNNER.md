@@ -46,11 +46,11 @@ mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
 
 或者<br/>
 ### 使用 [run_benchmarks](../run_benchmarks.py) 脚本运行
-![img.png](../images/img.png)
-![img.png](../images/img2.png)
+![img.png](images/img.png)
+![img.png](images/img2.png)
 ### 脚本分析[analyze](../analyze.py) 
-![img.png](../images/img3.png)
-![img.png](../images/img4.png)
+![img.png](images/img3.png)
+![img.png](images/img4.png)
 
 **run_benchmarks.py 参数**
 

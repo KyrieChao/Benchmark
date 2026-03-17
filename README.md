@@ -34,7 +34,7 @@
 
 以下是使用 JDK 17.0.16，3 个 Fork × 10 次迭代的性能比较结果：
 
-![Failure 框架性能测试报告](./images/performance_report.png)
+![Failure 框架性能测试报告](docs/images/failure_benchmark_visualization.png)
 
 ### 报告解读
 

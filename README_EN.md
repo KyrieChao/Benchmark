@@ -34,7 +34,7 @@ This repo provides runnable benchmark cases (via `main`, for fast reproduction a
 
 Below are the performance comparison results using JMH with JDK 17.0.16, 3 Forks × 10 Iterations:
 
-![Failure Framework Performance Test Report](./images/performance_report.png)
+![Failure Framework Performance Test Report](docs/images/failure_benchmark_visualization.png)
 
 ### Report Interpretation
 
